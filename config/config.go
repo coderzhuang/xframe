@@ -45,7 +45,7 @@ type Config struct {
 }
 
 func Init() {
-	confFile := "/Users/athos/Documents/code/self/go/test3/config/config.yaml"
+	confFile := "/Users/athos/Documents/code/self/go/xframe/config/config.yaml"
 	b, _ := ioutil.ReadFile(confFile)
 	_ = yaml.Unmarshal(b, &Conf)
 }

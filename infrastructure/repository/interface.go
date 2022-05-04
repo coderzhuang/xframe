@@ -2,7 +2,7 @@ package repository
 
 import (
 	"context"
-	"test/service/goods/entity"
+	"xframe/service/goods/entity"
 )
 
 type IGoodsRepository interface {

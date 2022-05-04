@@ -8,10 +8,10 @@ import (
 	"github.com/jinzhu/copier"
 	"go.opentelemetry.io/otel"
 	"go.opentelemetry.io/otel/codes"
-	"test/consts"
-	"test/infrastructure/repository"
-	"test/service/goods/entity"
 	"time"
+	"xframe/consts"
+	"xframe/infrastructure/repository"
+	"xframe/service/goods/entity"
 )
 
 type Goods struct {

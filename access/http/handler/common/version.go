@@ -2,8 +2,8 @@ package common
 
 import (
 	"github.com/gin-gonic/gin"
-	"test/config"
-	"test/pkg"
+	"xframe/config"
+	"xframe/pkg"
 )
 
 func Version(c *gin.Context) {

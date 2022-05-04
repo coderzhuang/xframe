@@ -6,9 +6,9 @@ import (
 	"go.opentelemetry.io/otel"
 	"go.opentelemetry.io/otel/attribute"
 	"go.opentelemetry.io/otel/codes"
-	"test/consts"
-	"test/pkg"
 	"time"
+	"xframe/consts"
+	"xframe/pkg"
 )
 
 type InfoReq struct {

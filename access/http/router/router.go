@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"go.uber.org/dig"
-	"test/access/http/handler/common"
-	"test/access/http/handler/goods"
+	"xframe/access/http/handler/common"
+	"xframe/access/http/handler/goods"
 )
 
 func InitRout(s *gin.Engine, c *dig.Container) {

@@ -6,9 +6,9 @@ import (
 	"go.opentelemetry.io/otel"
 	"go.opentelemetry.io/otel/attribute"
 	"go.opentelemetry.io/otel/codes"
-	"test/consts"
-	"test/pkg"
-	"test/service/goods/entity"
+	"xframe/consts"
+	"xframe/pkg"
+	"xframe/service/goods/entity"
 )
 
 type AddReq struct {

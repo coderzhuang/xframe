@@ -6,9 +6,9 @@ import (
 	"go.opentelemetry.io/otel"
 	"go.opentelemetry.io/otel/codes"
 	"gorm.io/gorm"
-	"test/consts"
-	"test/infrastructure/repository"
-	"test/service/goods/entity"
+	"xframe/consts"
+	"xframe/infrastructure/repository"
+	"xframe/service/goods/entity"
 )
 
 type Repository struct {

@@ -9,15 +9,15 @@ import (
 	"log"
 	"net"
 	"runtime"
-	grpcMall "test/access/grpc/proto/mall"
-	"test/access/grpc/server"
-	handlerGoods "test/access/http/handler/goods"
-	"test/access/http/router"
-	"test/config"
-	repoGoods "test/infrastructure/repository/goods"
-	"test/pkg"
-	serviceGoods "test/service/goods"
 	"time"
+	grpcMall "xframe/access/grpc/proto/mall"
+	"xframe/access/grpc/server"
+	handlerGoods "xframe/access/http/handler/goods"
+	"xframe/access/http/router"
+	"xframe/config"
+	repoGoods "xframe/infrastructure/repository/goods"
+	"xframe/pkg"
+	serviceGoods "xframe/service/goods"
 )
 
 const (

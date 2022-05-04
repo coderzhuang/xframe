@@ -2,9 +2,9 @@ package main
 
 import (
 	"os"
-	"test/cmd/api"
-	"test/config"
-	"test/pkg"
+	"xframe/cmd/api"
+	"xframe/config"
+	"xframe/pkg"
 )
 
 func main() {

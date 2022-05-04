@@ -3,11 +3,11 @@ package goods
 import (
 	"context"
 	"fmt"
-	"test/config"
-	"test/pkg"
-	"test/service/goods/entity"
 	"testing"
 	"time"
+	"xframe/config"
+	"xframe/pkg"
+	"xframe/service/goods/entity"
 )
 
 type MockInfo struct{}

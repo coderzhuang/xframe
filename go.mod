@@ -1,4 +1,4 @@
-module test
+module xframe
 
 go 1.16
 
