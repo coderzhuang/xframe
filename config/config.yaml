@@ -1,0 +1,21 @@
+server:
+  name: "testApp"
+  addr: "127.0.0.1:8080"
+
+db:
+  name: "default"
+  type: "mysql"
+  server: "127.0.0.1"
+  port: 3306
+  database: "test"
+  user: "root"
+  password: "123456"
+
+redis:
+  name: "default"
+  addr: "127.0.0.1:6379"
+  auth: ""
+  db: 0
+
+zipkin:
+  url: "http://127.0.0.1:9411/api/v2/spans"

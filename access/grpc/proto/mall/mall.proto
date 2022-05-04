@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+option go_package = "/access/grpc/proto/mall";
+
+package mall;
+
+// The greeting service definition.
+service Mall {
+  rpc AddGoods (AddGoodsRequest) returns (AddGoodsReply) {}
+  rpc GetGoods (GetGoodsRequest) returns (GetGoodsReply) {}
+}
+
+message AddGoodsRequest {
+  string name = 1;
+  string goods_no = 2;
+}
+
+message AddGoodsReply {
+  int32 code = 1;
+  string msg = 2;
+  bool data = 3;
+}
+
+message Goods {
+  string name = 1;
+  string goods_no = 2;
+  string create_at = 3;
+}
+
+message GetGoodsRequest {
+  int32 id = 1;
+}
+
+message GetGoodsReply {
+  int32 code = 1;
+  string msg = 2;
+  Goods data = 3;
+}
