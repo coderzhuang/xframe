@@ -3,6 +3,7 @@ package config
 import (
 	"github.com/ghodss/yaml"
 	"io/ioutil"
+	"os"
 )
 
 var (
@@ -45,7 +46,11 @@ type Config struct {
 }
 
 func Init() {
-	confFile := "/Users/athos/Documents/code/self/go/xframe/config/config.yaml"
-	b, _ := ioutil.ReadFile(confFile)
+	configFile := "./config/config.yaml"
+	_, err := os.Stat(configFile)
+	if !(err == nil || os.IsExist(err)) {
+		panic("config file does not exists")
+	}
+	b, _ := ioutil.ReadFile(configFile)
 	_ = yaml.Unmarshal(b, &Conf)
 }
