@@ -18,6 +18,7 @@ import (
 	grpcMall "xframe/access/grpc/proto/mall"
 	"xframe/access/grpc/server"
 	handlerGoods "xframe/access/http/handler/goods"
+	"xframe/access/http/middleware"
 	"xframe/access/http/router"
 	"xframe/config"
 	repoGoods "xframe/infrastructure/repository/goods"
@@ -56,6 +57,7 @@ func Stack() *cli.App {
 				// 初始化服务，注册路由
 				s := gin.New()
 				_ = s.SetTrustedProxies([]string{"0.0.0.0"})
+				s.Use(middleware.Exception)
 				router.InitRout(s, container)
 				httpServer = &http.Server{
 					Addr:    config.Conf.Server.Addr,
@@ -85,10 +87,9 @@ func Stack() *cli.App {
 			signal.Notify(sigs, syscall.SIGHUP, syscall.SIGINT, syscall.SIGTERM, syscall.SIGQUIT)
 			select {
 			case <-sigs:
-				log.Println("notify sigs")
 				_ = httpServer.Shutdown(context.Background())
 				grpcServer.GetServiceInfo()
-				log.Println("http shutdown")
+				log.Println("server shutdown")
 			}
 			return nil
 		},
