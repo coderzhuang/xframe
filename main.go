@@ -17,5 +17,4 @@ func main() {
 	if err := api.Stack().Run(os.Args); err != nil {
 		panic(err)
 	}
-	select {}
 }

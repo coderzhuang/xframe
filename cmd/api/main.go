@@ -1,6 +1,7 @@
 package api
 
 import (
+	"context"
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/urfave/cli/v2"
@@ -8,7 +9,11 @@ import (
 	"google.golang.org/grpc"
 	"log"
 	"net"
+	"net/http"
+	"os"
+	"os/signal"
 	"runtime"
+	"syscall"
 	"time"
 	grpcMall "xframe/access/grpc/proto/mall"
 	"xframe/access/grpc/server"
@@ -43,34 +48,20 @@ func Stack() *cli.App {
 		Action: func(c *cli.Context) error {
 			time.Local, _ = time.LoadLocation("Asia/Shanghai")
 
-			var err error
-			container := dig.New()
-			if err = container.Provide(pkg.NewMysql); err != nil {
-				fmt.Println(err.Error())
-			}
-			if err = container.Provide(pkg.NewRedis); err != nil {
-				fmt.Println(err.Error())
-			}
-			if err = container.Provide(repoGoods.New); err != nil {
-				fmt.Println(err.Error())
-			}
-			if err = container.Provide(serviceGoods.New); err != nil {
-				fmt.Println(err.Error())
-			}
-			if err = container.Provide(handlerGoods.New); err != nil {
-				fmt.Println(err.Error())
-			}
-			if err = container.Provide(server.New); err != nil {
-				fmt.Println(err.Error())
-			}
-
+			var httpServer *http.Server
+			var grpcServer *grpc.Server
+			container := makeContainer()
 			// http 服务
 			go func() {
 				// 初始化服务，注册路由
 				s := gin.New()
 				_ = s.SetTrustedProxies([]string{"0.0.0.0"})
 				router.InitRout(s, container)
-				_ = s.Run(config.Conf.Server.Addr)
+				httpServer = &http.Server{
+					Addr:    config.Conf.Server.Addr,
+					Handler: s,
+				}
+				_ = httpServer.ListenAndServe()
 			}()
 			// grpc 服务
 			go func() {
@@ -78,12 +69,11 @@ func Stack() *cli.App {
 				if err != nil {
 					log.Fatalf("failed to listen: %v", err)
 				}
-				s := grpc.NewServer()
-
+				grpcServer = grpc.NewServer()
 				err = container.Invoke(func(service *server.Mall) {
-					grpcMall.RegisterMallServer(s, service)
+					grpcMall.RegisterMallServer(grpcServer, service)
 					log.Printf("server listening at %v", lis.Addr())
-					if err := s.Serve(lis); err != nil {
+					if err := grpcServer.Serve(lis); err != nil {
 						log.Fatalf("failed to serve: %v", err)
 					}
 				})
@@ -91,7 +81,27 @@ func Stack() *cli.App {
 					fmt.Println(err.Error())
 				}
 			}()
+			sigs := make(chan os.Signal, 1)
+			signal.Notify(sigs, syscall.SIGHUP, syscall.SIGINT, syscall.SIGTERM, syscall.SIGQUIT)
+			select {
+			case <-sigs:
+				log.Println("notify sigs")
+				_ = httpServer.Shutdown(context.Background())
+				grpcServer.GetServiceInfo()
+				log.Println("http shutdown")
+			}
 			return nil
 		},
 	}
+}
+
+func makeContainer() *dig.Container {
+	container := dig.New()
+	_ = container.Provide(pkg.NewMysql)
+	_ = container.Provide(pkg.NewRedis)
+	_ = container.Provide(repoGoods.New)
+	_ = container.Provide(serviceGoods.New)
+	_ = container.Provide(handlerGoods.New)
+	_ = container.Provide(server.New)
+	return container
 }
