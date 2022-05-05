@@ -7,7 +7,7 @@ import (
 
 func main() {
 	// 启动服务
-	if err := api.Stack().Run(os.Args); err != nil {
+	if err := api.App.Run(os.Args); err != nil {
 		panic(err)
 	}
 }
