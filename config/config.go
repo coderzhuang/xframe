@@ -14,8 +14,9 @@ var (
 var Conf = Config{}
 
 type Server struct {
-	Name string `yaml:"name" json:"name"` // 服务名称
-	Addr string `yaml:"addr" json:"addr"` // 服务地址
+	Name  string `yaml:"name" json:"name"`   // 服务名称
+	Addr  string `yaml:"addr" json:"addr"`   // 服务地址
+	Debug bool   `yaml:"debug" json:"debug"` // debug
 }
 
 type Zipkin struct {

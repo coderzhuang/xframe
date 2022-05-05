@@ -3,16 +3,22 @@ package pkg
 import (
 	"github.com/sirupsen/logrus"
 	"os"
+	"xframe/config"
 )
 
-var logger *logrus.Logger
+var myLog *logrus.Logger
 
 func GetLog() *logrus.Logger {
-	if logger != nil {
-		logger := logrus.New()
-		logger.SetFormatter(&logrus.JSONFormatter{})
-		logger.SetOutput(os.Stdout)
-		logger.SetLevel(logrus.InfoLevel)
+	if myLog != nil {
+		return myLog
 	}
-	return logger
+	logLevel := logrus.WarnLevel
+	if config.Conf.Server.Debug {
+		logLevel = logrus.DebugLevel
+	}
+	myLog = logrus.New()
+	myLog.SetFormatter(&logrus.JSONFormatter{})
+	myLog.SetOutput(os.Stdout)
+	myLog.SetLevel(logLevel)
+	return myLog
 }
