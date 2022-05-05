@@ -13,7 +13,7 @@ func GetLog() *logrus.Logger {
 		return myLog
 	}
 	logLevel := logrus.WarnLevel
-	if config.Conf.Server.Debug {
+	if config.Conf.Common.Debug {
 		logLevel = logrus.DebugLevel
 	}
 	myLog = logrus.New()

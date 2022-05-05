@@ -1,3 +1,10 @@
+common:
+  debug: true
+
+grpc_server:
+  name: "testAppGrpc"
+  addr: ":2222"
+
 server:
   name: "testApp"
   addr: "127.0.0.1:8080"

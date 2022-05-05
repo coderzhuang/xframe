@@ -17,7 +17,7 @@ func NewMysql() *gorm.DB {
 	}
 
 	logLevel := logger.Error
-	if config.Conf.Server.Debug {
+	if config.Conf.Common.Debug {
 		logLevel = logger.Info
 	}
 	newLogger := logger.New(

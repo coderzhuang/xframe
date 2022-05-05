@@ -65,7 +65,7 @@ func Stack() *cli.App {
 			}()
 			// grpc 服务
 			go func() {
-				lis, err := net.Listen("tcp", ":2222")
+				lis, err := net.Listen("tcp", config.Conf.GrpcServer.Addr)
 				if err != nil {
 					log.Fatalf("failed to listen: %v", err)
 				}

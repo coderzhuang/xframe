@@ -13,37 +13,47 @@ var (
 
 var Conf = Config{}
 
+type Common struct {
+	Debug bool `yaml:"debug" json:"debug"` // debug
+}
+
 type Server struct {
-	Name  string `yaml:"name" json:"name"`   // 服务名称
-	Addr  string `yaml:"addr" json:"addr"`   // 服务地址
-	Debug bool   `yaml:"debug" json:"debug"` // debug
+	Name string `yaml:"name" json:"name"` // 服务名称
+	Addr string `yaml:"addr" json:"addr"` // 服务地址
+}
+
+type GrpcServer struct {
+	Name string `yaml:"name" json:"name"` // 服务名称
+	Addr string `yaml:"addr" json:"addr"` // 服务地址
 }
 
 type Zipkin struct {
-	Url string `yaml:"url" json:"url"`
+	Url string `yaml:"url" json:"url"` //
 }
 type DbItem struct {
-	Name     string `yaml:"name" json:"name"`
-	Type     string `yaml:"type" json:"type"`
-	Server   string `yaml:"server" json:"server"`
-	Port     int    `yaml:"port" json:"port"`
-	Database string `yaml:"database" json:"database"`
-	User     string `yaml:"user" json:"user"`
-	Password string `yaml:"password" json:"password"`
+	Name     string `yaml:"name" json:"name"`         //
+	Type     string `yaml:"type" json:"type"`         //
+	Server   string `yaml:"server" json:"server"`     //
+	Port     int    `yaml:"port" json:"port"`         //
+	Database string `yaml:"database" json:"database"` //
+	User     string `yaml:"user" json:"user"`         //
+	Password string `yaml:"password" json:"password"` //
 }
 
 type RedisItem struct {
-	Name string `yaml:"name" json:"name"`
-	Addr string `yaml:"addr" json:"addr"`
-	Auth string `yaml:"auth" json:"auth"`
-	DB   int    `yaml:"db" json:"db"`
+	Name string `yaml:"name" json:"name"` //
+	Addr string `yaml:"addr" json:"addr"` //
+	Auth string `yaml:"auth" json:"auth"` //
+	DB   int    `yaml:"db" json:"db"`     //
 }
 
 type Config struct {
-	Server *Server    `yaml:"server" json:"server"`
-	DB     *DbItem    `yaml:"db" json:"db"`
-	Redis  *RedisItem `yaml:"redis" json:"redis"`
-	Zipkin *Zipkin    `yaml:"zipkin" json:"zipkin"`
+	Common     *Common     `yaml:"common" json:"common"`           //
+	Server     *Server     `yaml:"server" json:"server"`           //
+	GrpcServer *GrpcServer `yaml:"grpc_server" json:"grpc_server"` //
+	DB         *DbItem     `yaml:"db" json:"db"`                   //
+	Redis      *RedisItem  `yaml:"redis" json:"redis"`             //
+	Zipkin     *Zipkin     `yaml:"zipkin" json:"zipkin"`           //
 }
 
 func Init() {
