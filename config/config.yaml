@@ -8,7 +8,6 @@ grpc_server:
 server:
   name: "testApp"
   addr: "127.0.0.1:8080"
-  debug: true
 
 db:
   name: "default"

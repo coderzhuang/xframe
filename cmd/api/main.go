@@ -31,10 +31,8 @@ var App = &cli.App{
 
 func Run(c *cli.Context) error {
 	time.Local, _ = time.LoadLocation("Asia/Shanghai")
-
 	docs.SwaggerInfo_swagger.BasePath = "/"
-	// 加载配置
-	config.Init()
+
 	// 加载 telemetry
 	shutdown := pkg.InitTracer()
 	defer shutdown()

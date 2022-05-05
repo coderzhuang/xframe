@@ -56,7 +56,7 @@ type Config struct {
 	Zipkin     *Zipkin     `yaml:"zipkin" json:"zipkin"`           //
 }
 
-func Init() {
+func init() {
 	configFile := "./config/config.yaml"
 	_, err := os.Stat(configFile)
 	if !(err == nil || os.IsExist(err)) {

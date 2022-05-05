@@ -7,17 +7,23 @@ import (
 	"go.opentelemetry.io/otel/codes"
 	"gorm.io/gorm"
 	"xframe/consts"
-	"xframe/infrastructure/repository"
 	"xframe/service/goods/entity"
 )
+
+type IGoodsRepository interface {
+	i() //接口中所有方法只能在本包中实现
+	Add(context.Context, entity.Goods) error
+	Info(context.Context, int) (*entity.Goods, error)
+}
 
 type Repository struct {
 	Db *gorm.DB
 }
 
-func New(db *gorm.DB) repository.IGoodsRepository {
+func New(db *gorm.DB) IGoodsRepository {
 	return &Repository{Db: db}
 }
+func (*Repository) i() {}
 
 func (d *Repository) Add(ctx context.Context, data entity.Goods) error {
 	_, span := otel.GetTracerProvider().Tracer(consts.Name).

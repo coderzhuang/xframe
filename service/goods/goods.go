@@ -10,16 +10,16 @@ import (
 	"go.opentelemetry.io/otel/codes"
 	"time"
 	"xframe/consts"
-	"xframe/infrastructure/repository"
+	"xframe/infrastructure/repository/goods"
 	"xframe/service/goods/entity"
 )
 
 type Goods struct {
 	Rdb       *redis.Client
-	repoGoods repository.IGoodsRepository
+	repoGoods goods.IGoodsRepository
 }
 
-func New(rdb *redis.Client, repoGoods repository.IGoodsRepository) *Goods {
+func New(rdb *redis.Client, repoGoods goods.IGoodsRepository) *Goods {
 	return &Goods{Rdb: rdb, repoGoods: repoGoods}
 }
 
