@@ -21,6 +21,13 @@ type InfoRes struct {
 	CreateTime time.Time `json:"create_at" copier:"CreatedAt"` // 商品创建时间
 }
 
+// Info
+// @Summary      goods detail
+// @Description
+// @Produce      json
+// @Param        id query string true "商品ID"
+// @Response     200  {object}  pkg.Response{data=InfoRes}
+// @Router       /goods [get]
 func (h *HandlerGoods) Info(c *gin.Context) {
 	var err error
 	ctx, span := otel.GetTracerProvider().Tracer(consts.Name).

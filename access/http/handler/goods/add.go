@@ -16,6 +16,15 @@ type AddReq struct {
 	GoodsNo string `json:"goods_no"`                //
 }
 
+// Add
+// @Summary      add goods
+// @Description
+// @Accept       json
+// @Produce      json
+// @Param        a body AddReq false " "
+// @Response     200  {object}  pkg.Response
+// @Router       /goods [post]
+// @Router /goods [post]
 func (h *HandlerGoods) Add(c *gin.Context) {
 	var err error
 	ctx, span := otel.GetTracerProvider().Tracer(consts.Name).

@@ -1,0 +1,118 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "contact": {}
+    },
+    "basePath": "/api/v1",
+    "paths": {
+        "/goods": {
+            "get": {
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "goods detail",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "商品ID",
+                        "name": "id",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/pkg.Response"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/goods.InfoRes"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            },
+            "post": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "add goods",
+                "parameters": [
+                    {
+                        "description": " ",
+                        "name": "a",
+                        "in": "body",
+                        "schema": {
+                            "$ref": "#/definitions/goods.AddReq"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/pkg.Response"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "goods.AddReq": {
+            "type": "object",
+            "required": [
+                "name"
+            ],
+            "properties": {
+                "goods_no": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                }
+            }
+        },
+        "goods.InfoRes": {
+            "type": "object",
+            "properties": {
+                "create_at": {
+                    "description": "商品创建时间",
+                    "type": "string"
+                },
+                "goods_no": {
+                    "description": "商品NO",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "商品名称",
+                    "type": "string"
+                }
+            }
+        },
+        "pkg.Response": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer"
+                },
+                "data": {},
+                "msg": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}

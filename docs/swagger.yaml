@@ -1,0 +1,73 @@
+basePath: /api/v1
+definitions:
+  goods.AddReq:
+    properties:
+      goods_no:
+        type: string
+      name:
+        type: string
+    required:
+    - name
+    type: object
+  goods.InfoRes:
+    properties:
+      create_at:
+        description: 商品创建时间
+        type: string
+      goods_no:
+        description: 商品NO
+        type: string
+      name:
+        description: 商品名称
+        type: string
+    type: object
+  pkg.Response:
+    properties:
+      code:
+        type: integer
+      data: {}
+      msg:
+        type: string
+    type: object
+info:
+  contact: {}
+paths:
+  /goods:
+    get:
+      parameters:
+      - description: 商品ID
+        in: query
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/pkg.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/goods.InfoRes'
+              type: object
+      summary: goods detail
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: ' '
+        in: body
+        name: a
+        schema:
+          $ref: '#/definitions/goods.AddReq'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pkg.Response'
+      summary: add goods
+swagger: "2.0"

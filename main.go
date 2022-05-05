@@ -4,10 +4,12 @@ import (
 	"os"
 	"xframe/cmd/api"
 	"xframe/config"
+	"xframe/docs"
 	"xframe/pkg"
 )
 
 func main() {
+	docs.SwaggerInfo_swagger.BasePath = "/"
 	// 加载配置
 	config.Init()
 	// 加载 telemetry
