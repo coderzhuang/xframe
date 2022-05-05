@@ -21,6 +21,7 @@ import (
 	"xframe/access/http/middleware"
 	"xframe/access/http/router"
 	"xframe/config"
+	"xframe/docs"
 	repoGoods "xframe/infrastructure/repository/goods"
 	"xframe/pkg"
 	serviceGoods "xframe/service/goods"
@@ -48,6 +49,13 @@ func Stack() *cli.App {
 		Usage:   fmt.Sprintf("./%s -%s=%s", config.Conf.Server.Name, ArgConfig, ArgConfigFilename),
 		Action: func(c *cli.Context) error {
 			time.Local, _ = time.LoadLocation("Asia/Shanghai")
+
+			docs.SwaggerInfo_swagger.BasePath = "/"
+			// 加载配置
+			config.Init()
+			// 加载 telemetry
+			shutdown := pkg.InitTracer()
+			defer shutdown()
 
 			var httpServer *http.Server
 			var grpcServer *grpc.Server

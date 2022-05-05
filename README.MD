@@ -22,3 +22,5 @@ todo
 - [ ] 完善追踪
 - [ ] 集成job
 - [ ] 完善启动过程
+- [ ] fatal error: concurrent map writes
+- [ ] context

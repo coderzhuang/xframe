@@ -33,7 +33,8 @@ func NewMysql() *gorm.DB {
 	dsn := fmt.Sprintf("%s:%s@tcp(%s:%d)/%s?charset=utf8mb4&parseTime=True&loc=Local",
 		conf.User, conf.Password, conf.Server, conf.Port, conf.Database,
 	)
-	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{
+	var err error
+	db, err = gorm.Open(mysql.Open(dsn), &gorm.Config{
 		Logger: newLogger,
 	})
 	if err != nil {
