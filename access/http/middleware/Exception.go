@@ -14,7 +14,7 @@ func Exception(c *gin.Context) {
 			return
 		}
 		log.Printf("%+v\n", err)
-		log.Printf(string(debug.Stack()))
+		log.Println(string(debug.Stack()))
 		msg := "Internal Server Error"
 		if v, ok := err.(error); ok {
 			msg = v.Error()
