@@ -43,6 +43,11 @@ func Run(c *cli.Context) error {
 	// http 服务
 	go func() {
 		// 初始化服务，注册路由
+		if config.Conf.Common.Debug {
+			gin.SetMode(gin.DebugMode)
+		} else {
+			gin.SetMode(gin.ReleaseMode)
+		}
 		s := gin.New()
 		_ = s.SetTrustedProxies([]string{"0.0.0.0"})
 		s.Use(middleware.Exception)
