@@ -31,7 +31,7 @@ var App = &cli.App{
 
 func Run(c *cli.Context) error {
 	time.Local, _ = time.LoadLocation("Asia/Shanghai")
-	docs.SwaggerInfo_swagger.BasePath = "/"
+	docs.SwaggerInfo.BasePath = "/"
 
 	// 加载 telemetry
 	shutdown := pkg.InitTracer()
@@ -49,7 +49,7 @@ func Run(c *cli.Context) error {
 			gin.SetMode(gin.ReleaseMode)
 		}
 		s := gin.New()
-		_ = s.SetTrustedProxies([]string{"0.0.0.0"})
+		_ = s.SetTrustedProxies(config.Conf.Server.TrustedProxies)
 		s.Use(middleware.Exception)
 		router.InitRout(s, container)
 		httpServer = &http.Server{

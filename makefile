@@ -15,3 +15,8 @@ analyse:
 
 .PHONY: precommit
 precommit: analyse
+
+.PHONY: swag
+swag:
+	bash ./scripts/swagger.sh
+

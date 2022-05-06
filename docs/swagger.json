@@ -3,7 +3,6 @@
     "info": {
         "contact": {}
     },
-    "basePath": "/api/v1",
     "paths": {
         "/goods": {
             "get": {
