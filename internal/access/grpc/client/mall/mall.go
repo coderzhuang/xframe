@@ -8,7 +8,7 @@ import (
 
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
-	pb "xframe/access/grpc/proto/mall"
+	pb "xframe/internal/access/grpc/proto/mall"
 )
 
 var (

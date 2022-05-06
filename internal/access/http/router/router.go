@@ -1,25 +1,23 @@
 package router
 
 import (
-	"github.com/gin-gonic/gin"
 	swaggerfiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
-	"go.uber.org/dig"
 	"xframe/internal/access/http/handler/common"
-	"xframe/internal/access/http/handler/goods"
+	"xframe/internal/core"
 )
 
-func InitRout(s *gin.Engine, c *dig.Container) {
-	s.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerfiles.Handler))
+func InitRout(s *core.HttpServer) {
+	s.Engine.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerfiles.Handler))
 
-	commonGroup := s.Group("/")
+	commonGroup := s.Engine.Group("/")
 	{
 		commonGroup.GET("/version", common.Version)
 	}
 
-	goodsGroup := s.Group("/goods")
-	_ = c.Invoke(func(HandlerGoods *goods.HandlerGoods) {
-		goodsGroup.POST("/", HandlerGoods.Add)
-		goodsGroup.GET("/", HandlerGoods.Info)
-	})
+	goodsGroup := s.Engine.Group("/goods")
+	{
+		goodsGroup.POST("/", s.HandlerGoods.Add)
+		goodsGroup.GET("/", s.HandlerGoods.Info)
+	}
 }

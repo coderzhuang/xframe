@@ -3,7 +3,6 @@ package api
 import (
 	"context"
 	"fmt"
-	"github.com/gin-gonic/gin"
 	"github.com/urfave/cli/v2"
 	"google.golang.org/grpc"
 	"log"
@@ -17,9 +16,9 @@ import (
 	"xframe/config"
 	"xframe/docs"
 	grpcMall "xframe/internal/access/grpc/proto/mall"
-	"xframe/internal/access/grpc/server"
 	"xframe/internal/access/http/middleware"
 	"xframe/internal/access/http/router"
+	"xframe/internal/core"
 	"xframe/pkg"
 )
 
@@ -41,42 +40,34 @@ func Run(c *cli.Context) error {
 	var grpcServer *grpc.Server
 	container := GetContainer()
 	// http 服务
-	go func() {
-		// 初始化服务，注册路由
-		if config.Conf.Common.Debug {
-			gin.SetMode(gin.DebugMode)
-		} else {
-			gin.SetMode(gin.ReleaseMode)
-		}
-		s := gin.New()
-		_ = s.SetTrustedProxies(config.Conf.Server.TrustedProxies)
-		s.Use(middleware.Exception)
-		router.InitRout(s, container)
-		httpServer = &http.Server{
-			Addr:    config.Conf.Server.Addr,
-			Handler: s,
-		}
-		_ = httpServer.ListenAndServe()
-	}()
-	// grpc 服务
-	go func() {
-		lis, err := net.Listen("tcp", config.Conf.GrpcServer.Addr)
-		if err != nil {
-			log.Fatalf("failed to listen: %v", err)
-		}
-		grpcServer = grpc.NewServer()
-		err = container.Invoke(func(service *server.Mall) {
-			grpcMall.RegisterMallServer(grpcServer, service)
+	err := container.Invoke(func(s *core.HttpServer, g *core.GrpcServer) {
+		grpcServer = g.Engine
+		go func() {
+			s.Engine.Use(middleware.Exception)
+			router.InitRout(s)
+			httpServer = &http.Server{
+				Addr:    config.Conf.Server.Addr,
+				Handler: s.Engine,
+			}
+			_ = httpServer.ListenAndServe()
+		}()
+		go func() {
+			lis, err := net.Listen("tcp", config.Conf.GrpcServer.Addr)
+			if err != nil {
+				log.Fatalf("failed to listen: %v", err)
+				return
+			}
+			grpcMall.RegisterMallServer(g.Engine, g.ServerMall)
 			log.Printf("server listening at %v", lis.Addr())
-			if err := grpcServer.Serve(lis); err != nil {
+			if err := g.Engine.Serve(lis); err != nil {
 				log.Fatalf("failed to serve: %v", err)
 			}
-		})
-		if err != nil {
-			fmt.Println(err.Error())
-		}
-	}()
-	// 定时脚本
+		}()
+	})
+	if err != nil {
+		fmt.Println(err.Error())
+		return nil
+	}
 	cronjob := InitCron()
 	cronjob.Start()
 
