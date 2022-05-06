@@ -71,14 +71,25 @@ func Run(c *cli.Context) error {
 			fmt.Println(err.Error())
 		}
 	}()
+	// 定时脚本
+	cronjob := InitCron()
+	cronjob.Start()
 
-	sigs := make(chan os.Signal, 1)
-	signal.Notify(sigs, syscall.SIGHUP, syscall.SIGINT, syscall.SIGTERM, syscall.SIGQUIT)
+	// 监听信号
+	quit := make(chan os.Signal, 1)
+	signal.Notify(quit, syscall.SIGHUP, syscall.SIGINT, syscall.SIGTERM, syscall.SIGQUIT)
+	<-quit
+
+	_ = httpServer.Shutdown(context.Background())
+	grpcServer.GracefulStop()
+	ctx := cronjob.Stop()
+
+	log.Println("Shutting down cron...")
 	select {
-	case <-sigs:
-		_ = httpServer.Shutdown(context.Background())
-		grpcServer.GracefulStop()
-		log.Println("server shutdown")
+	case <-time.After(10 * time.Second):
+		log.Fatal("Cron forced to shutdown...")
+	case <-ctx.Done():
+		log.Println("Cron exiting...")
 	}
 	return nil
 }
