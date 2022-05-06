@@ -3,7 +3,7 @@ package goods
 import (
 	"context"
 	"time"
-	"xframe/service/goods/entity"
+	"xframe/internal/service/goods/entity"
 )
 
 type MockInfo struct{}

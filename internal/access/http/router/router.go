@@ -5,8 +5,8 @@ import (
 	swaggerfiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
 	"go.uber.org/dig"
-	"xframe/access/http/handler/common"
-	"xframe/access/http/handler/goods"
+	"xframe/internal/access/http/handler/common"
+	"xframe/internal/access/http/handler/goods"
 )
 
 func InitRout(s *gin.Engine, c *dig.Container) {

@@ -6,8 +6,8 @@ import (
 	"go.opentelemetry.io/otel"
 	"go.opentelemetry.io/otel/codes"
 	"gorm.io/gorm"
-	"xframe/consts"
-	"xframe/service/goods/entity"
+	"xframe/internal/consts"
+	"xframe/internal/service/goods/entity"
 )
 
 type IGoodsRepository interface {

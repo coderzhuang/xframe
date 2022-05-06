@@ -1,6 +1,6 @@
 package goods
 
-import "xframe/service/goods"
+import "xframe/internal/service/goods"
 
 type HandlerGoods struct {
 	ServiceGoods *goods.Goods

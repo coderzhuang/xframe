@@ -9,9 +9,9 @@ import (
 	"go.opentelemetry.io/otel"
 	"go.opentelemetry.io/otel/codes"
 	"time"
-	"xframe/consts"
-	"xframe/infrastructure/repository/goods"
-	"xframe/service/goods/entity"
+	"xframe/internal/consts"
+	"xframe/internal/infrastructure/repository/goods"
+	"xframe/internal/service/goods/entity"
 )
 
 type Goods struct {

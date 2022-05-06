@@ -14,12 +14,12 @@ import (
 	"runtime"
 	"syscall"
 	"time"
-	grpcMall "xframe/access/grpc/proto/mall"
-	"xframe/access/grpc/server"
-	"xframe/access/http/middleware"
-	"xframe/access/http/router"
 	"xframe/config"
 	"xframe/docs"
+	grpcMall "xframe/internal/access/grpc/proto/mall"
+	"xframe/internal/access/grpc/server"
+	"xframe/internal/access/http/middleware"
+	"xframe/internal/access/http/router"
 	"xframe/pkg"
 )
 

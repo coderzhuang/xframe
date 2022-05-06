@@ -4,9 +4,9 @@ import (
 	"context"
 	"github.com/jinzhu/copier"
 	"log"
-	grpcMall "xframe/access/grpc/proto/mall"
-	"xframe/service/goods"
-	"xframe/service/goods/entity"
+	grpcMall "xframe/internal/access/grpc/proto/mall"
+	"xframe/internal/service/goods"
+	"xframe/internal/service/goods/entity"
 )
 
 type Mall struct {

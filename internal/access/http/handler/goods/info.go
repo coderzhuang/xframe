@@ -7,7 +7,7 @@ import (
 	"go.opentelemetry.io/otel/attribute"
 	"go.opentelemetry.io/otel/codes"
 	"time"
-	"xframe/consts"
+	"xframe/internal/consts"
 	"xframe/pkg"
 )
 

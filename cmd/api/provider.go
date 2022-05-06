@@ -2,11 +2,11 @@ package api
 
 import (
 	"go.uber.org/dig"
-	"xframe/access/grpc/server"
-	handlerGoods "xframe/access/http/handler/goods"
-	repoGoods "xframe/infrastructure/repository/goods"
+	"xframe/internal/access/grpc/server"
+	handlerGoods "xframe/internal/access/http/handler/goods"
+	repoGoods "xframe/internal/infrastructure/repository/goods"
+	serviceGoods "xframe/internal/service/goods"
 	"xframe/pkg"
-	serviceGoods "xframe/service/goods"
 )
 
 var container *dig.Container
