@@ -3,6 +3,7 @@ package api
 import (
 	"context"
 	"fmt"
+	"github.com/gin-gonic/gin"
 	"github.com/urfave/cli/v2"
 	"google.golang.org/grpc"
 	"log"
@@ -43,6 +44,12 @@ func Run(c *cli.Context) error {
 	err := container.Invoke(func(s *core.HttpServer, g *core.GrpcServer) {
 		grpcServer = g.Engine
 		go func() {
+			if config.Conf.Common.Debug {
+				gin.SetMode(gin.DebugMode)
+			} else {
+				gin.SetMode(gin.ReleaseMode)
+			}
+			_ = s.Engine.SetTrustedProxies(config.Conf.Server.TrustedProxies)
 			s.Engine.Use(middleware.Exception)
 			router.InitRout(s)
 			httpServer = &http.Server{
