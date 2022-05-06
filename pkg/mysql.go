@@ -5,6 +5,8 @@ import (
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"
+	"log"
+	"os"
 	"time"
 	"xframe/config"
 )
@@ -21,7 +23,8 @@ func NewMysql() *gorm.DB {
 		logLevel = logger.Info
 	}
 	newLogger := logger.New(
-		GetLog(),
+		//GetLog(),// mysql的错误等级会转换成log的info，底层调用的是log.Printf，当log设置error后，mysql的error信息也不能输出了
+		log.New(os.Stdout, "\r\n", log.LstdFlags), // io writer
 		logger.Config{
 			SlowThreshold:             time.Second, // Slow SQL threshold
 			LogLevel:                  logLevel,    // Log level
