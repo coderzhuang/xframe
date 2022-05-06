@@ -77,7 +77,7 @@ func Run(c *cli.Context) error {
 	select {
 	case <-sigs:
 		_ = httpServer.Shutdown(context.Background())
-		grpcServer.GetServiceInfo()
+		grpcServer.GracefulStop()
 		log.Println("server shutdown")
 	}
 	return nil

@@ -19,8 +19,7 @@ todo
 - [x] 集成swag
 - [x] debug模式
 - [x] 数据库链接数
+- [x] 集成job
 - [ ] 完善追踪
-- [ ] 集成job
 - [ ] 完善启动过程
-- [ ] fatal error: concurrent map writes
 - [ ] context
