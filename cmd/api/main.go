@@ -20,6 +20,7 @@ import (
 	"xframe/internal/access/http/middleware"
 	"xframe/internal/access/http/router"
 	"xframe/internal/core"
+	"xframe/internal/cron"
 	"xframe/pkg"
 )
 
@@ -75,7 +76,7 @@ func Run(c *cli.Context) error {
 		fmt.Println(err.Error())
 		return nil
 	}
-	cronjob := InitCron()
+	cronjob := cron.InitCron()
 	cronjob.Start()
 
 	// 监听信号
