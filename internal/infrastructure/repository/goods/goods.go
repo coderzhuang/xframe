@@ -26,7 +26,7 @@ func New(db *gorm.DB) IGoodsRepository {
 func (*Repository) i() {}
 
 func (d *Repository) Add(ctx context.Context, data entity.Goods) error {
-	_, span := otel.GetTracerProvider().Tracer(consts.Name).
+	ctx, span := otel.GetTracerProvider().Tracer(consts.Name).
 		Start(ctx, "Repository-Add")
 	defer span.End()
 
@@ -40,7 +40,7 @@ func (d *Repository) Add(ctx context.Context, data entity.Goods) error {
 }
 
 func (d *Repository) Info(ctx context.Context, id int) (res *entity.Goods, err error) {
-	_, span := otel.GetTracerProvider().Tracer(consts.Name).
+	ctx, span := otel.GetTracerProvider().Tracer(consts.Name).
 		Start(ctx, "Repository-Info")
 	defer span.End()
 
