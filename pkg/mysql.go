@@ -2,6 +2,7 @@ package pkg
 
 import (
 	"fmt"
+	"github.com/uptrace/opentelemetry-go-extra/otelgorm"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"
@@ -41,6 +42,9 @@ func NewMysql() *gorm.DB {
 		Logger: newLogger,
 	})
 	if err != nil {
+		panic(err)
+	}
+	if err := db.Use(otelgorm.NewPlugin()); err != nil {
 		panic(err)
 	}
 	return db

@@ -20,7 +20,7 @@ todo
 - [x] debug模式
 - [x] 数据库链接数
 - [x] 集成job
-- [ ] 完善追踪
+- [x] 完善追踪
 - [ ] 完善启动过程
 - [ ] context
 - [ ] docker部署
