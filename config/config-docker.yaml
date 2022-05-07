@@ -1,0 +1,30 @@
+common:
+  debug: true #为true 应用会打印debug级别的日志，否则为Error级别；mysql会打印info级别的日志，否则为Error级别
+
+grpc_server:
+  name: "testAppGrpc"
+  addr: ":2222"
+
+server:
+  name: "testApp"
+  addr: ":8080"
+  trusted_proxies:
+    - "0.0.0.0"
+
+db:
+  name: "default"
+  type: "mysql"
+  server: "mysql"
+  port: 3306
+  database: "test"
+  user: "root"
+  password: "123456"
+
+redis:
+  name: "default"
+  addr: "redis:6379"
+  auth: ""
+  db: 0
+
+zipkin:
+  url: "http://zipkin:9411/api/v2/spans"
