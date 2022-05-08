@@ -1,4 +1,4 @@
-package api
+package main
 
 import (
 	"context"
@@ -96,4 +96,11 @@ func Run(c *cli.Context) error {
 		log.Println("Cron exiting...")
 	}
 	return nil
+}
+
+func main() {
+	// 启动服务
+	if err := App.Run(os.Args); err != nil {
+		panic(err)
+	}
 }
