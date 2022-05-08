@@ -1,7 +1,6 @@
 package telemetry
 
 import (
-	"context"
 	"go.opentelemetry.io/otel"
 	"go.opentelemetry.io/otel/exporters/zipkin"
 	"go.opentelemetry.io/otel/sdk/resource"
@@ -10,7 +9,7 @@ import (
 	"xframe/config"
 )
 
-func InitTracer() func() {
+func InitTracer() *sdktrace.TracerProvider {
 	exporter, err := zipkin.New(config.Conf.Zipkin.Url)
 	if err != nil {
 		panic(err)
@@ -19,11 +18,9 @@ func InitTracer() func() {
 		sdktrace.WithSpanProcessor(sdktrace.NewBatchSpanProcessor(exporter)),
 		sdktrace.WithResource(resource.NewWithAttributes(
 			semconv.SchemaURL,
-			semconv.ServiceNameKey.String("zipkin-test"),
+			semconv.ServiceNameKey.String(config.Conf.HttpServer.Name),
 		)),
 	)
 	otel.SetTracerProvider(tp)
-	return func() {
-		_ = tp.Shutdown(context.Background())
-	}
+	return tp
 }

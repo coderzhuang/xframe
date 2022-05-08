@@ -3,11 +3,7 @@ package goods
 import (
 	"github.com/gin-gonic/gin"
 	"github.com/jinzhu/copier"
-	"go.opentelemetry.io/otel"
-	"go.opentelemetry.io/otel/attribute"
-	"go.opentelemetry.io/otel/codes"
 	"time"
-	"xframe/internal/consts"
 	"xframe/pkg/common"
 )
 
@@ -29,24 +25,12 @@ type InfoRes struct {
 // @Response     200  {object}  common.Response{data=InfoRes}
 // @Router       /goods [get]
 func (h *HandlerGoods) Info(c *gin.Context) {
-	var err error
-	ctx, span := otel.GetTracerProvider().Tracer(consts.Name).
-		Start(c, "handler-Info")
-	defer func() {
-		if err != nil {
-			span.RecordError(err)
-			span.SetStatus(codes.Error, err.Error())
-		}
-		span.End()
-	}()
-
 	var req InfoReq
 	if err := c.ShouldBindQuery(&req); err != nil {
 		common.ResponseErr(c, 100000, err.Error())
 		return
 	}
-	span.SetAttributes(attribute.Int("request.id", req.Id))
-	data, err := h.ServiceGoods.Info(ctx, req.Id)
+	data, err := h.ServiceGoods.Info(c.Request.Context(), req.Id)
 	if err != nil {
 		common.ResponseErr(c, 100005, err.Error())
 		return

@@ -6,10 +6,7 @@ import (
 	"fmt"
 	"github.com/go-redis/redis/v8"
 	"github.com/jinzhu/copier"
-	"go.opentelemetry.io/otel"
-	"go.opentelemetry.io/otel/codes"
 	"time"
-	"xframe/internal/consts"
 	"xframe/internal/repository/goods"
 	"xframe/internal/service/goods/entity"
 )
@@ -24,31 +21,10 @@ func New(rdb *redis.Client, repoGoods goods.IGoodsRepository) *Goods {
 }
 
 func (s *Goods) Add(ctx context.Context, data entity.Goods) error {
-	var err error
-	ctx, span := otel.GetTracerProvider().Tracer(consts.Name).
-		Start(ctx, "Service-Add")
-	defer func() {
-		if err != nil {
-			span.RecordError(err)
-			span.SetStatus(codes.Error, err.Error())
-		}
-		span.End()
-	}()
-	err = s.repoGoods.Add(ctx, data)
-	return err
+	return s.repoGoods.Add(ctx, data)
 }
 
 func (s *Goods) Info(ctx context.Context, id int) (res *entity.Goods, err error) {
-	ctx, span := otel.GetTracerProvider().Tracer(consts.Name).
-		Start(ctx, "Service-Info")
-	defer func() {
-		if err != nil {
-			span.RecordError(err)
-			span.SetStatus(codes.Error, err.Error())
-		}
-		span.End()
-	}()
-
 	rKey := fmt.Sprintf("goods:%d", id)
 	var cache string
 	cache, err = s.Rdb.Get(ctx, rKey).Result()

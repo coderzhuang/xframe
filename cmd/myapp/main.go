@@ -10,18 +10,17 @@ import (
 	"xframe/pkg/provider"
 )
 
-var App = &cli.App{
-	Version: fmt.Sprintf("%s|%s|%s|%s",
-		runtime.GOOS, runtime.GOARCH, config.BuildVersion, config.BuildAt),
-	Action: func(c *cli.Context) error {
-		container := provider.GetContainer()
-		return container.Invoke(func(app *application.Application) {
-			app.Start()
-		})
-	},
-}
-
 func main() {
+	var App = &cli.App{
+		Version: fmt.Sprintf("%s|%s|%s|%s",
+			runtime.GOOS, runtime.GOARCH, config.BuildVersion, config.BuildAt),
+		Action: func(c *cli.Context) error {
+			container := provider.GetContainer()
+			return container.Invoke(func(app *application.Application) {
+				app.Start()
+			})
+		},
+	}
 	// 启动服务
 	if err := App.Run(os.Args); err != nil {
 		panic(err)
