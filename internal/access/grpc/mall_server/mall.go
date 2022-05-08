@@ -1,4 +1,4 @@
-package server
+package mall_server
 
 import (
 	"context"

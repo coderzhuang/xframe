@@ -17,7 +17,8 @@ type Common struct {
 	Debug bool `yaml:"debug" json:"debug"` // debug
 }
 
-type Server struct {
+type HttpServer struct {
+	Switch         bool     `yaml:"switch" json:"switch"`                   // 开关
 	Name           string   `yaml:"name" json:"name"`                       // 服务名称
 	Addr           string   `yaml:"addr" json:"addr"`                       // 服务地址
 	Mode           string   `yaml:"mode" json:"mode"`                       // gin Mode
@@ -25,8 +26,17 @@ type Server struct {
 }
 
 type GrpcServer struct {
-	Name string `yaml:"name" json:"name"` // 服务名称
-	Addr string `yaml:"addr" json:"addr"` // 服务地址
+	Switch bool   `yaml:"switch" json:"switch"` // 开关
+	Name   string `yaml:"name" json:"name"`     // 服务名称
+	Addr   string `yaml:"addr" json:"addr"`     // 服务地址
+}
+
+type CronServer struct {
+	Switch bool `yaml:"switch" json:"switch"` // 开关
+}
+
+type Swagger struct {
+	Switch bool `yaml:"switch" json:"switch"` // 开关
 }
 
 type Zipkin struct {
@@ -51,8 +61,10 @@ type RedisItem struct {
 
 type Config struct {
 	Common     *Common     `yaml:"common" json:"common"`           //
-	Server     *Server     `yaml:"server" json:"server"`           //
+	HttpServer *HttpServer `yaml:"http_server" json:"http_server"` //
 	GrpcServer *GrpcServer `yaml:"grpc_server" json:"grpc_server"` //
+	CronServer *CronServer `yaml:"cron_server" json:"cron_server"` //
+	Swagger    *Swagger    `yaml:"swagger" json:"swagger"`         //
 	DB         *DbItem     `yaml:"db" json:"db"`                   //
 	Redis      *RedisItem  `yaml:"redis" json:"redis"`             //
 	Zipkin     *Zipkin     `yaml:"zipkin" json:"zipkin"`           //

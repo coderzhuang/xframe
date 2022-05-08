@@ -4,7 +4,7 @@ LDFLAGS=-ldflags "-X xframe/config.BuildVersion=${VERSION} -X xframe/config.Buil
 
 .PHONY: build
 build:
-	@go build ${LDFLAGS} -o ./app .
+	@go build ${LDFLAGS} -o ./app ./cmd/myapp
 
 .PHONY: analyse
 analyse:

@@ -5,17 +5,17 @@ import (
 	"log"
 	"net"
 	"xframe/config"
+	"xframe/internal/access/grpc/mall_server"
 	grpcMall "xframe/internal/access/grpc/proto/mall"
-	"xframe/internal/access/grpc/server"
 	"xframe/pkg/application"
 )
 
 type GrpcService struct {
 	e          *grpc.Server
-	ServerMall *server.Mall
+	ServerMall *mall_server.Mall
 }
 
-func New(ServerMall *server.Mall) application.Service {
+func New(ServerMall *mall_server.Mall) application.Service {
 	return &GrpcService{
 		e:          grpc.NewServer(),
 		ServerMall: ServerMall,

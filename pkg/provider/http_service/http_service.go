@@ -16,7 +16,7 @@ type HttpService struct {
 func New(e *gin.Engine) application.Service {
 	server := &HttpService{e: e}
 	server.h = &http.Server{
-		Addr:    config.Conf.Server.Addr,
+		Addr:    config.Conf.HttpServer.Addr,
 		Handler: e,
 	}
 	return server

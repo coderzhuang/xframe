@@ -5,6 +5,7 @@ import (
 	swaggerfiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
 	"xframe/config"
+	"xframe/docs"
 	"xframe/internal/access/http/middleware"
 	"xframe/pkg/common"
 )
@@ -12,11 +13,14 @@ import (
 type ControllerClosure func(r *gin.Engine)
 
 func NewRouter(fn ControllerClosure) *gin.Engine {
-	gin.SetMode(config.Conf.Server.Mode)
+	gin.SetMode(config.Conf.HttpServer.Mode)
 	e := gin.New()
-	_ = e.SetTrustedProxies(config.Conf.Server.TrustedProxies)
+	_ = e.SetTrustedProxies(config.Conf.HttpServer.TrustedProxies)
 
-	e.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerfiles.Handler))
+	if config.Conf.Swagger.Switch {
+		docs.SwaggerInfo.BasePath = "/"
+		e.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerfiles.Handler))
+	}
 	e.GET("/version", func(c *gin.Context) {
 		common.ResponseSuc(c, map[string]string{
 			"BuildVersion": config.BuildVersion,

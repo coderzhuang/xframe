@@ -5,12 +5,11 @@ import (
 	"fmt"
 	"testing"
 	"xframe/internal/repository/goods"
-
-	"xframe/pkg"
+	"xframe/pkg/redis"
 )
 
 func TestInfo(t *testing.T) {
-	rdb := pkg.NewRedis()
+	rdb := redis.New()
 	s := New(rdb, &goods.MockInfo{})
 	res, _ := s.Info(context.Background(), 1)
 	fmt.Println(res)

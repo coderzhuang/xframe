@@ -28,6 +28,10 @@ func New(sg ServerGroup) *Application {
 }
 
 func (a *Application) Start() {
+	if len(a.Services) == 0 {
+		log.Println("There is no Services")
+		return
+	}
 	for _, service := range a.Services {
 		go service.Run()
 	}
