@@ -22,9 +22,8 @@ type AddReq struct {
 // @Accept       json
 // @Produce      json
 // @Param        a body AddReq false " "
-// @Response     200  {object}  pkg.Response
+// @Response     200  {object}  common.Response
 // @Router       /goods [post]
-// @Router /goods [post]
 func (h *HandlerGoods) Add(c *gin.Context) {
 	var err error
 	ctx, span := otel.GetTracerProvider().Tracer(consts.Name).

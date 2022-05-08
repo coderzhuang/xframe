@@ -1,4 +1,12 @@
 definitions:
+  common.Response:
+    properties:
+      code:
+        type: integer
+      data: {}
+      msg:
+        type: string
+    type: object
   goods.AddReq:
     properties:
       goods_no:
@@ -20,14 +28,6 @@ definitions:
         description: 商品名称
         type: string
     type: object
-  pkg.Response:
-    properties:
-      code:
-        type: integer
-      data: {}
-      msg:
-        type: string
-    type: object
 info:
   contact: {}
 paths:
@@ -46,7 +46,7 @@ paths:
           description: OK
           schema:
             allOf:
-            - $ref: '#/definitions/pkg.Response'
+            - $ref: '#/definitions/common.Response'
             - properties:
                 data:
                   $ref: '#/definitions/goods.InfoRes'
@@ -67,6 +67,6 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/pkg.Response'
+            $ref: '#/definitions/common.Response'
       summary: add goods
 swagger: "2.0"

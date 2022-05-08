@@ -26,7 +26,7 @@ type InfoRes struct {
 // @Description
 // @Produce      json
 // @Param        id query string true "商品ID"
-// @Response     200  {object}  pkg.Response{data=InfoRes}
+// @Response     200  {object}  common.Response{data=InfoRes}
 // @Router       /goods [get]
 func (h *HandlerGoods) Info(c *gin.Context) {
 	var err error

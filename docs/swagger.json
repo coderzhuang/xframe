@@ -25,7 +25,7 @@
                         "schema": {
                             "allOf": [
                                 {
-                                    "$ref": "#/definitions/pkg.Response"
+                                    "$ref": "#/definitions/common.Response"
                                 },
                                 {
                                     "type": "object",
@@ -62,7 +62,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/pkg.Response"
+                            "$ref": "#/definitions/common.Response"
                         }
                     }
                 }
@@ -70,6 +70,18 @@
         }
     },
     "definitions": {
+        "common.Response": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer"
+                },
+                "data": {},
+                "msg": {
+                    "type": "string"
+                }
+            }
+        },
         "goods.AddReq": {
             "type": "object",
             "required": [
@@ -97,18 +109,6 @@
                 },
                 "name": {
                     "description": "商品名称",
-                    "type": "string"
-                }
-            }
-        },
-        "pkg.Response": {
-            "type": "object",
-            "properties": {
-                "code": {
-                    "type": "integer"
-                },
-                "data": {},
-                "msg": {
                     "type": "string"
                 }
             }

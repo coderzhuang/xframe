@@ -37,7 +37,7 @@ const docTemplate = `{
                         "schema": {
                             "allOf": [
                                 {
-                                    "$ref": "#/definitions/pkg.Response"
+                                    "$ref": "#/definitions/common.Response"
                                 },
                                 {
                                     "type": "object",
@@ -74,7 +74,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/pkg.Response"
+                            "$ref": "#/definitions/common.Response"
                         }
                     }
                 }
@@ -82,6 +82,18 @@ const docTemplate = `{
         }
     },
     "definitions": {
+        "common.Response": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer"
+                },
+                "data": {},
+                "msg": {
+                    "type": "string"
+                }
+            }
+        },
         "goods.AddReq": {
             "type": "object",
             "required": [
@@ -109,18 +121,6 @@ const docTemplate = `{
                 },
                 "name": {
                     "description": "商品名称",
-                    "type": "string"
-                }
-            }
-        },
-        "pkg.Response": {
-            "type": "object",
-            "properties": {
-                "code": {
-                    "type": "integer"
-                },
-                "data": {},
-                "msg": {
                     "type": "string"
                 }
             }
