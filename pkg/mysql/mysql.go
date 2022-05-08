@@ -44,6 +44,14 @@ func New() *gorm.DB {
 	if err != nil {
 		panic(err)
 	}
+	sqlDB, err := db.DB()
+	if err != nil {
+		panic(err)
+	}
+	sqlDB.SetMaxOpenConns(config.Conf.DB.MaxOpenConn)
+	sqlDB.SetMaxIdleConns(config.Conf.DB.MaxIdleConn)
+	sqlDB.SetConnMaxLifetime(time.Minute * config.Conf.DB.ConnMaxLifeTime)
+
 	if err := db.Use(otelgorm.NewPlugin()); err != nil {
 		panic(err)
 	}

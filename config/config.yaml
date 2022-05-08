@@ -28,6 +28,9 @@ db:
   database: "test"
   user: "root"
   password: "123456"
+  conn_max_life_time: 60
+  max_idle_conn: 60
+  max_open_conn: 10
 
 redis:
   name: "default"
