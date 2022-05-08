@@ -2,7 +2,7 @@ package http_service
 
 import (
 	"github.com/gin-gonic/gin"
-	swaggerfiles "github.com/swaggo/files"
+	swaggerFiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
 	"xframe/config"
 	"xframe/docs"
@@ -17,9 +17,13 @@ func NewRouter(fn ControllerClosure) *gin.Engine {
 	e := gin.New()
 	_ = e.SetTrustedProxies(config.Conf.HttpServer.TrustedProxies)
 
+	// 添加prometheus 监控
+	//e.Use(middleware.New(e).Middleware())
+	//e.GET("/metrics", gin.WrapH(promhttp.Handler()))
+
 	if config.Conf.Swagger.Switch {
 		docs.SwaggerInfo.BasePath = "/"
-		e.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerfiles.Handler))
+		e.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 	}
 	e.GET("/version", func(c *gin.Context) {
 		common.ResponseSuc(c, map[string]string{
