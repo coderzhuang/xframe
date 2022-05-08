@@ -4,7 +4,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"log"
 	"runtime/debug"
-	"xframe/pkg"
+	"xframe/pkg/common"
 )
 
 func Exception(c *gin.Context) {
@@ -19,7 +19,7 @@ func Exception(c *gin.Context) {
 		if v, ok := err.(error); ok {
 			msg = v.Error()
 		}
-		c.JSON(200, pkg.Response{
+		c.JSON(200, common.Response{
 			Code: 500,
 			Msg:  msg,
 			Data: nil,

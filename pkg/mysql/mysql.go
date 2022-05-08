@@ -1,4 +1,4 @@
-package pkg
+package mysql
 
 import (
 	"fmt"
@@ -14,7 +14,7 @@ import (
 
 var db *gorm.DB
 
-func NewMysql() *gorm.DB {
+func New() *gorm.DB {
 	if db != nil {
 		return db
 	}

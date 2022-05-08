@@ -10,7 +10,7 @@ import (
 	"go.opentelemetry.io/otel/codes"
 	"time"
 	"xframe/internal/consts"
-	"xframe/internal/infrastructure/repository/goods"
+	"xframe/internal/repository/goods"
 	"xframe/internal/service/goods/entity"
 )
 

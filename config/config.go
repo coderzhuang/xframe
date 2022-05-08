@@ -20,6 +20,7 @@ type Common struct {
 type Server struct {
 	Name           string   `yaml:"name" json:"name"`                       // 服务名称
 	Addr           string   `yaml:"addr" json:"addr"`                       // 服务地址
+	Mode           string   `yaml:"mode" json:"mode"`                       // gin Mode
 	TrustedProxies []string `yaml:"trusted_proxies" json:"trusted_proxies"` // 信任的代理
 }
 

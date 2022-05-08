@@ -4,7 +4,7 @@ import (
 	"context"
 	"fmt"
 	"testing"
-	"xframe/internal/infrastructure/repository/goods"
+	"xframe/internal/repository/goods"
 
 	"xframe/pkg"
 )

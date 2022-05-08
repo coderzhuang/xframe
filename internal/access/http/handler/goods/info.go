@@ -8,7 +8,7 @@ import (
 	"go.opentelemetry.io/otel/codes"
 	"time"
 	"xframe/internal/consts"
-	"xframe/pkg"
+	"xframe/pkg/common"
 )
 
 type InfoReq struct {
@@ -42,19 +42,19 @@ func (h *HandlerGoods) Info(c *gin.Context) {
 
 	var req InfoReq
 	if err := c.ShouldBindQuery(&req); err != nil {
-		pkg.ResponseErr(c, 100000, err.Error())
+		common.ResponseErr(c, 100000, err.Error())
 		return
 	}
 	span.SetAttributes(attribute.Int("request.id", req.Id))
 	data, err := h.ServiceGoods.Info(ctx, req.Id)
 	if err != nil {
-		pkg.ResponseErr(c, 100005, err.Error())
+		common.ResponseErr(c, 100005, err.Error())
 		return
 	}
 	result := InfoRes{}
 	if err := copier.Copy(&result, data); err != nil {
-		pkg.ResponseErr(c, 100006, err.Error())
+		common.ResponseErr(c, 100006, err.Error())
 		return
 	}
-	pkg.ResponseSuc(c, result)
+	common.ResponseSuc(c, result)
 }

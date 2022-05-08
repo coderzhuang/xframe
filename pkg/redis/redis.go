@@ -1,11 +1,11 @@
-package pkg
+package redis
 
 import (
 	"github.com/go-redis/redis/v8"
 	"xframe/config"
 )
 
-func NewRedis() *redis.Client {
+func New() *redis.Client {
 	conf := config.Conf.Redis
 	rdb := redis.NewClient(&redis.Options{
 		Addr:     conf.Addr,
