@@ -31,7 +31,6 @@ func (d *Repository) Add(ctx context.Context, data entity.Goods) error {
 }
 
 func (d *Repository) Info(ctx context.Context, id int) (res *entity.Goods, err error) {
-	res = &entity.Goods{}
 	goodsPo := Goods{}
 	res = &entity.Goods{}
 	err = d.Db.WithContext(ctx).First(&goodsPo, id).Error

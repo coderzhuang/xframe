@@ -18,5 +18,6 @@ func (s *CronService) Run() {
 }
 
 func (s *CronService) Shutdown() {
-	s.c.Stop()
+	ctx := s.c.Stop()
+	<-ctx.Done()
 }

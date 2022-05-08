@@ -95,7 +95,7 @@ func (gp *GinPrometheus) Middleware() gin.HandlerFunc {
 			gp.updatePath()
 		}
 		// 把不需要的过滤掉
-		if gp.ignored[c.Request.URL.String()] == true {
+		if gp.ignored[c.Request.URL.String()] {
 			c.Next()
 			return
 		}
