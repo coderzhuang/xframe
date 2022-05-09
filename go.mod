@@ -3,6 +3,7 @@ module xframe
 go 1.16
 
 require (
+	github.com/chenjiandongx/ginprom v0.0.0-20210617023641-6c809602c38a
 	github.com/ghodss/yaml v1.0.0
 	github.com/gin-gonic/gin v1.7.7
 	github.com/go-playground/validator/v10 v10.10.0 // indirect
@@ -21,12 +22,9 @@ require (
 	github.com/urfave/cli/v2 v2.3.0
 	go.opentelemetry.io/contrib/instrumentation/github.com/gin-gonic/gin/otelgin v0.32.0
 	go.opentelemetry.io/otel v1.7.0
-	go.opentelemetry.io/otel/exporters/prometheus v0.30.0
 	go.opentelemetry.io/otel/exporters/zipkin v1.7.0
-	go.opentelemetry.io/otel/metric v0.30.0
+	go.opentelemetry.io/otel/metric v0.30.0 // indirect
 	go.opentelemetry.io/otel/sdk v1.7.0
-	go.opentelemetry.io/otel/sdk/metric v0.30.0
-	go.opentelemetry.io/otel/trace v1.7.0
 	go.uber.org/dig v1.14.1
 	golang.org/x/crypto v0.0.0-20220112180741-5e0467b6c7ce // indirect
 	google.golang.org/grpc v1.46.0

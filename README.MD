@@ -22,6 +22,6 @@ todo
 - [x] 集成job
 - [x] docker部署
 - [x] 完善启动过程
+- [x] 普罗米修斯 依赖 https://github.com/chenjiandongx/ginprom
 - [ ] 完善追踪
-- [ ] 普罗米修斯
-- [ ] 配置option化
+

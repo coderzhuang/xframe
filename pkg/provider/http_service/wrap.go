@@ -1,14 +1,15 @@
 package http_service
 
 import (
+	"github.com/chenjiandongx/ginprom"
 	"github.com/gin-gonic/gin"
+	"github.com/prometheus/client_golang/prometheus/promhttp"
 	swaggerFiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
 	"go.opentelemetry.io/contrib/instrumentation/github.com/gin-gonic/gin/otelgin"
 	"xframe/config"
 	"xframe/docs"
 	"xframe/pkg/common"
-	"xframe/pkg/telemetry"
 )
 
 type ControllerClosure func(r *gin.Engine)
@@ -19,12 +20,11 @@ func NewRouter(fn ControllerClosure) *gin.Engine {
 	_ = e.SetTrustedProxies(config.Conf.HttpServer.TrustedProxies)
 
 	// trace
-	telemetry.InitTracer()
 	e.Use(otelgin.Middleware(config.Conf.HttpServer.Name))
 
 	// 添加prometheus 监控
-	//e.Use(middleware.New(e).Middleware())
-	//e.GET("/metrics", gin.WrapH(promhttp.Handler()))
+	e.Use(ginprom.PromMiddleware(&ginprom.PromOpts{ExcludeRegexEndpoint: "^/(swagger|metrics)"}))
+	e.GET("/metrics", ginprom.PromHandler(promhttp.Handler()))
 
 	if config.Conf.Swagger.Switch {
 		docs.SwaggerInfo.BasePath = "/"
