@@ -21,10 +21,12 @@ require (
 	github.com/uptrace/opentelemetry-go-extra/otelgorm v0.1.12
 	github.com/urfave/cli/v2 v2.3.0
 	go.opentelemetry.io/contrib/instrumentation/github.com/gin-gonic/gin/otelgin v0.32.0
+	go.opentelemetry.io/contrib/propagators/b3 v1.7.0
 	go.opentelemetry.io/otel v1.7.0
 	go.opentelemetry.io/otel/exporters/zipkin v1.7.0
 	go.opentelemetry.io/otel/metric v0.30.0 // indirect
 	go.opentelemetry.io/otel/sdk v1.7.0
+	go.opentelemetry.io/otel/trace v1.7.0
 	go.uber.org/dig v1.14.1
 	golang.org/x/crypto v0.0.0-20220112180741-5e0467b6c7ce // indirect
 	google.golang.org/grpc v1.46.0

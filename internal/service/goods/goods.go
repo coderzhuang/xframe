@@ -32,7 +32,7 @@ func (s *Goods) Info(ctx context.Context, id int) (res *entity.Goods, err error)
 		return
 	}
 	res = &entity.Goods{}
-	if err != nil { // 不存在缓存
+	if true || err != nil { // 不存在缓存
 		var data *entity.Goods
 		data, err = s.repoGoods.Info(ctx, id)
 		if err != nil {

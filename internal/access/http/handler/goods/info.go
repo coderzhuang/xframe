@@ -5,6 +5,7 @@ import (
 	"github.com/jinzhu/copier"
 	"time"
 	"xframe/pkg/common"
+	"xframe/pkg/util"
 )
 
 type InfoReq struct {
@@ -35,6 +36,7 @@ func (h *HandlerGoods) Info(c *gin.Context) {
 		common.ResponseErr(c, 100005, err.Error())
 		return
 	}
+	util.Get(c.Request.Context()) // 测试trace
 	result := InfoRes{}
 	if err := copier.Copy(&result, data); err != nil {
 		common.ResponseErr(c, 100006, err.Error())
