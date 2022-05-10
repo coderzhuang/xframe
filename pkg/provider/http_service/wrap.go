@@ -7,7 +7,6 @@ import (
 	swaggerFiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
 	"go.opentelemetry.io/contrib/instrumentation/github.com/gin-gonic/gin/otelgin"
-	b3prop "go.opentelemetry.io/contrib/propagators/b3"
 	"go.opentelemetry.io/otel"
 	"xframe/config"
 	"xframe/docs"
@@ -22,9 +21,7 @@ func NewRouter(fn ControllerClosure) *gin.Engine {
 	_ = e.SetTrustedProxies(config.Conf.HttpServer.TrustedProxies)
 
 	// trace
-	b3 := b3prop.New()
-	otel.SetTextMapPropagator(b3)
-	e.Use(otelgin.Middleware(config.Conf.HttpServer.Name, otelgin.WithPropagators(b3)))
+	e.Use(otelgin.Middleware(config.Conf.HttpServer.Name, otelgin.WithPropagators(otel.GetTextMapPropagator())))
 
 	// 添加prometheus 监控
 	e.Use(ginprom.PromMiddleware(&ginprom.PromOpts{ExcludeRegexEndpoint: "^/(swagger|metrics)"}))

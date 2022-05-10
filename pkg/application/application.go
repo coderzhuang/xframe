@@ -34,7 +34,7 @@ func (a *Application) Start() {
 		log.Println("There is no Services")
 		return
 	}
-	tp := telemetry.InitTracer()
+	tp := telemetry.Init()
 	defer func() {
 		_ = tp.Shutdown(context.Background())
 	}()

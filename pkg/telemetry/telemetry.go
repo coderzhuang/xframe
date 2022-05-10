@@ -1,6 +1,7 @@
 package telemetry
 
 import (
+	b3prop "go.opentelemetry.io/contrib/propagators/b3"
 	"go.opentelemetry.io/otel"
 	"go.opentelemetry.io/otel/exporters/zipkin"
 	"go.opentelemetry.io/otel/sdk/resource"
@@ -9,7 +10,7 @@ import (
 	"xframe/config"
 )
 
-func InitTracer() *sdktrace.TracerProvider {
+func Init() *sdktrace.TracerProvider {
 	exporter, err := zipkin.New(config.Conf.Zipkin.Url)
 	if err != nil {
 		panic(err)
@@ -22,5 +23,6 @@ func InitTracer() *sdktrace.TracerProvider {
 		)),
 	)
 	otel.SetTracerProvider(tp)
+	otel.SetTextMapPropagator(b3prop.New())
 	return tp
 }
