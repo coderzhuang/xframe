@@ -9,7 +9,11 @@ type CronService struct {
 	c *cron.Cron
 }
 
-func New(c *cron.Cron) application.Service {
+type CronClosure func(*cron.Cron)
+
+func New(fn CronClosure) application.Service {
+	c := cron.New()
+	fn(c)
 	return &CronService{c: c}
 }
 

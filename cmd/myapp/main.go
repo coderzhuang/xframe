@@ -11,8 +11,8 @@ import (
 	"xframe/core/provider/grpc_service"
 	"xframe/core/provider/http_service"
 	"xframe/internal"
+	"xframe/internal/access/cron"
 	"xframe/internal/access/http/router"
-	"xframe/internal/cron"
 	"xframe/pkg/config"
 )
 
@@ -22,7 +22,6 @@ func InitProvider() *dig.Container {
 	_ = container.Provide(application.New)
 	if config.Conf.HttpServer.Switch {
 		_ = container.Provide(http_service.New, dig.Group("server"))
-		_ = container.Provide(http_service.NewRouter)
 		_ = container.Provide(router.InitRoute, dig.Group("middle"))
 	}
 	if config.Conf.GrpcServer.Switch {
@@ -30,7 +29,6 @@ func InitProvider() *dig.Container {
 	}
 	if config.Conf.CronServer.Switch {
 		_ = container.Provide(cron_service.New, dig.Group("server"))
-		_ = container.Provide(cron_service.NewRouter)
 		_ = container.Provide(cron.InitCron)
 	}
 	// 加载业务相关服务
