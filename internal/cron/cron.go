@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"github.com/robfig/cron/v3"
 	"time"
+	"xframe/core/provider/cron_service"
 	"xframe/internal/service/goods"
-	"xframe/pkg/provider/cron_service"
 )
 
 func InitCron(

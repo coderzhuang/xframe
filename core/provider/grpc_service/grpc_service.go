@@ -4,10 +4,10 @@ import (
 	"google.golang.org/grpc"
 	"log"
 	"net"
-	"xframe/config"
+	"xframe/core/application"
 	"xframe/internal/access/grpc/mall_server"
 	grpcMall "xframe/internal/access/grpc/proto/mall"
-	"xframe/pkg/application"
+	"xframe/pkg/config"
 )
 
 type GrpcService struct {

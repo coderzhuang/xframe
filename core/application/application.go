@@ -1,13 +1,11 @@
 package application
 
 import (
-	"context"
 	"go.uber.org/dig"
 	"log"
 	"os"
 	"os/signal"
 	"syscall"
-	"xframe/pkg/telemetry"
 )
 
 type Service interface {
@@ -34,10 +32,6 @@ func (a *Application) Start() {
 		log.Println("There is no Services")
 		return
 	}
-	tp := telemetry.Init()
-	defer func() {
-		_ = tp.Shutdown(context.Background())
-	}()
 
 	for _, service := range a.Services {
 		go service.Run()

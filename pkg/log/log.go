@@ -3,7 +3,7 @@ package log
 import (
 	"github.com/sirupsen/logrus"
 	"os"
-	"xframe/config"
+	"xframe/pkg/config"
 )
 
 var myLog *logrus.Logger

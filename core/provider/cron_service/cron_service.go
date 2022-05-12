@@ -2,7 +2,7 @@ package cron_service
 
 import (
 	"github.com/robfig/cron/v3"
-	"xframe/pkg/application"
+	"xframe/core/application"
 )
 
 type CronService struct {

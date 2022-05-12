@@ -2,7 +2,7 @@ package redis
 
 import (
 	"github.com/go-redis/redis/v8"
-	"xframe/config"
+	"xframe/pkg/config"
 )
 
 func New() *redis.Client {

@@ -1,16 +1,24 @@
+#必要
 common:
   debug: true #为true 应用会打印debug级别的日志，否则为Error级别；mysql会打印info级别的日志，否则为Error级别
 
 grpc_server:
-  name: "testAppGrpc"
-  addr: ":2222"
+  switch: false
+  name: "myAppGrpc"
+  addr: "0.0.0.0:2222"
 
-server:
-  name: "testApp"
-  addr: ":8080"
+http_server:
+  switch: true
+  name: "myAppHttp"
+  addr: "0.0.0.0:8080"
+  mode: "debug"
   trusted_proxies:
     - "0.0.0.0"
 
+cron_server:
+  switch: false
+
+#可选
 db:
   name: "default"
   type: "mysql"
@@ -19,6 +27,9 @@ db:
   database: "test"
   user: "root"
   password: "123456"
+  conn_max_life_time: 60
+  max_idle_conn: 60
+  max_open_conn: 10
 
 redis:
   name: "default"

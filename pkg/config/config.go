@@ -36,13 +36,10 @@ type CronServer struct {
 	Switch bool `yaml:"switch" json:"switch"` // 开关
 }
 
-type Swagger struct {
-	Switch bool `yaml:"switch" json:"switch"` // 开关
-}
-
 type Zipkin struct {
 	Url string `yaml:"url" json:"url"` //
 }
+
 type DbItem struct {
 	Name            string        `yaml:"name" json:"name"`                             //
 	Type            string        `yaml:"type" json:"type"`                             //
@@ -68,7 +65,6 @@ type Config struct {
 	HttpServer *HttpServer `yaml:"http_server" json:"http_server"` //
 	GrpcServer *GrpcServer `yaml:"grpc_server" json:"grpc_server"` //
 	CronServer *CronServer `yaml:"cron_server" json:"cron_server"` //
-	Swagger    *Swagger    `yaml:"swagger" json:"swagger"`         //
 	DB         *DbItem     `yaml:"db" json:"db"`                   //
 	Redis      *RedisItem  `yaml:"redis" json:"redis"`             //
 	Zipkin     *Zipkin     `yaml:"zipkin" json:"zipkin"`           //

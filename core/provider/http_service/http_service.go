@@ -4,8 +4,8 @@ import (
 	"context"
 	"github.com/gin-gonic/gin"
 	"net/http"
-	"xframe/config"
-	"xframe/pkg/application"
+	"xframe/core/application"
+	"xframe/pkg/config"
 )
 
 type HttpService struct {

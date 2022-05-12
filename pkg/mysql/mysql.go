@@ -9,7 +9,7 @@ import (
 	"log"
 	"os"
 	"time"
-	"xframe/config"
+	"xframe/pkg/config"
 )
 
 var db *gorm.DB
