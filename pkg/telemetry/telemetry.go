@@ -2,6 +2,7 @@ package telemetry
 
 import (
 	"github.com/chenjiandongx/ginprom"
+	"github.com/coderzhuang/core/provider/http_service"
 	"github.com/gin-gonic/gin"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 	"go.opentelemetry.io/contrib/instrumentation/github.com/gin-gonic/gin/otelgin"
@@ -11,11 +12,10 @@ import (
 	"go.opentelemetry.io/otel/sdk/resource"
 	sdktrace "go.opentelemetry.io/otel/sdk/trace"
 	semconv "go.opentelemetry.io/otel/semconv/v1.10.0"
-	"xframe/core/provider/http_service"
 	"xframe/pkg/config"
 )
 
-func Init() http_service.Option {
+func Init() http_service.Middle {
 	return func(e *gin.Engine) {
 		exporter, err := zipkin.New(config.Conf.Zipkin.Url)
 		if err != nil {

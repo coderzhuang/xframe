@@ -2,14 +2,14 @@ package main
 
 import (
 	"fmt"
+	"github.com/coderzhuang/core/application"
+	"github.com/coderzhuang/core/provider/cron_service"
+	"github.com/coderzhuang/core/provider/grpc_service"
+	"github.com/coderzhuang/core/provider/http_service"
 	"github.com/urfave/cli/v2"
 	"go.uber.org/dig"
 	"os"
 	"runtime"
-	"xframe/core/application"
-	"xframe/core/provider/cron_service"
-	"xframe/core/provider/grpc_service"
-	"xframe/core/provider/http_service"
 	"xframe/internal"
 	"xframe/internal/access/cron"
 	"xframe/internal/access/http/router"

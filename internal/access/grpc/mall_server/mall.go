@@ -2,20 +2,24 @@ package mall_server
 
 import (
 	"context"
+	"github.com/coderzhuang/core/provider/grpc_service"
 	"github.com/jinzhu/copier"
+	"google.golang.org/grpc"
 	"log"
 	grpcMall "xframe/internal/access/grpc/proto/mall"
 	"xframe/internal/service/goods"
 	"xframe/internal/service/goods/entity"
 )
 
+func RegisterServer(s *goods.Goods) grpc_service.Server {
+	return func(e grpc.ServiceRegistrar) {
+		grpcMall.RegisterMallServer(e, &Mall{ServiceGoods: s})
+	}
+}
+
 type Mall struct {
 	grpcMall.UnimplementedMallServer
 	ServiceGoods *goods.Goods
-}
-
-func New(s *goods.Goods) *Mall {
-	return &Mall{ServiceGoods: s}
 }
 
 func (s *Mall) AddGoods(ctx context.Context, in *grpcMall.AddGoodsRequest) (res *grpcMall.AddGoodsReply, err error) {
