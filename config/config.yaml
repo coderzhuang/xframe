@@ -10,7 +10,7 @@ grpc_server:
 http_server:
   switch: true
   name: "myAppHttp"
-  addr: "0.0.0.0:8080"
+  addr: "0.0.0.0:8082"
   mode: "debug"
   trusted_proxies:
     - "0.0.0.0"
@@ -39,3 +39,5 @@ redis:
 
 zipkin:
   url: "http://127.0.0.1:9411/api/v2/spans"
+
+test: "hello"
