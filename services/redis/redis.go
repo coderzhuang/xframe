@@ -1,12 +1,12 @@
 package redis
 
 import (
+	"github.com/coderzhuang/core"
 	"github.com/go-redis/redis/v8"
-	"xframe/pkg/config"
 )
 
 func New() *redis.Client {
-	conf := config.Conf.Redis
+	conf := core.Conf.Redis
 	rdb := redis.NewClient(&redis.Options{
 		Addr:     conf.Addr,
 		Password: conf.Auth,

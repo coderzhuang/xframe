@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"testing"
 	"xframe/internal/repository/goods"
-	"xframe/pkg/redis"
+	"xframe/services/redis"
 )
 
 func TestInfo(t *testing.T) {

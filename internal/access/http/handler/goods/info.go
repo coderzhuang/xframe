@@ -2,10 +2,7 @@ package goods
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/jinzhu/copier"
 	"time"
-	"xframe/pkg/common"
-	"xframe/pkg/util"
 )
 
 type InfoReq struct {
@@ -28,19 +25,19 @@ type InfoRes struct {
 func (h *HandlerGoods) Info(c *gin.Context) {
 	var req InfoReq
 	if err := c.ShouldBindQuery(&req); err != nil {
-		common.ResponseErr(c, 100000, err.Error())
+		//common.ResponseErr(c, 100000, err.Error())
 		return
 	}
-	data, err := h.ServiceGoods.Info(c.Request.Context(), req.Id)
+	_, err := h.ServiceGoods.Info(c.Request.Context(), req.Id)
 	if err != nil {
-		common.ResponseErr(c, 100005, err.Error())
+		//common.ResponseErr(c, 100005, err.Error())
 		return
 	}
-	util.Get(c.Request.Context()) // 测试trace
-	result := InfoRes{}
-	if err := copier.Copy(&result, data); err != nil {
-		common.ResponseErr(c, 100006, err.Error())
-		return
-	}
-	common.ResponseSuc(c, result)
+	//util.Get(c.Request.Context()) // 测试trace
+	//result := InfoRes{}
+	//if err := copier.Copy(&result, data); err != nil {
+	//	//common.ResponseErr(c, 100006, err.Error())
+	//	return
+	//}
+	//common.ResponseSuc(c, result)
 }

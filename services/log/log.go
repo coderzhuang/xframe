@@ -1,9 +1,9 @@
 package log
 
 import (
+	"github.com/coderzhuang/core"
 	"github.com/sirupsen/logrus"
 	"os"
-	"xframe/pkg/config"
 )
 
 var myLog *logrus.Logger
@@ -13,7 +13,7 @@ func GetLog() *logrus.Logger {
 		return myLog
 	}
 	logLevel := logrus.ErrorLevel
-	if config.Conf.Common.Debug {
+	if core.Conf.Common.Debug {
 		logLevel = logrus.DebugLevel
 	}
 	myLog = logrus.New()

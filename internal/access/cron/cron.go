@@ -5,14 +5,14 @@ import (
 	"github.com/robfig/cron/v3"
 	"time"
 
-	"github.com/coderzhuang/core/provider/cron_service"
+	"github.com/coderzhuang/core"
 
 	"xframe/internal/service/goods"
 )
 
 func InitCron(
 	goodsService *goods.Goods,
-) cron_service.CronClosure {
+) core.CronClosure {
 	return func(c *cron.Cron) {
 		_, _ = c.AddFunc("@every 1s", func() {
 			//_, _ = goodsService.Info(context.Background(), 1)

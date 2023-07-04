@@ -2,14 +2,13 @@ package mysql
 
 import (
 	"fmt"
-	"github.com/uptrace/opentelemetry-go-extra/otelgorm"
+	"github.com/coderzhuang/core"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"
 	"log"
 	"os"
 	"time"
-	"xframe/pkg/config"
 )
 
 var db *gorm.DB
@@ -20,7 +19,7 @@ func New() *gorm.DB {
 	}
 
 	logLevel := logger.Error
-	if config.Conf.Common.Debug {
+	if core.Conf.Common.Debug {
 		logLevel = logger.Info
 	}
 	newLogger := logger.New(
@@ -33,7 +32,7 @@ func New() *gorm.DB {
 			Colorful:                  false,       // Disable color
 		},
 	)
-	conf := config.Conf.DB
+	conf := core.Conf.DB
 	dsn := fmt.Sprintf("%s:%s@tcp(%s:%d)/%s?charset=utf8mb4&parseTime=True&loc=Local",
 		conf.User, conf.Password, conf.Server, conf.Port, conf.Database,
 	)
@@ -48,12 +47,12 @@ func New() *gorm.DB {
 	if err != nil {
 		panic(err)
 	}
-	sqlDB.SetMaxOpenConns(config.Conf.DB.MaxOpenConn)
-	sqlDB.SetMaxIdleConns(config.Conf.DB.MaxIdleConn)
-	sqlDB.SetConnMaxLifetime(time.Minute * config.Conf.DB.ConnMaxLifeTime)
+	sqlDB.SetMaxOpenConns(core.Conf.DB.MaxOpenConn)
+	sqlDB.SetMaxIdleConns(core.Conf.DB.MaxIdleConn)
+	sqlDB.SetConnMaxLifetime(time.Minute * core.Conf.DB.ConnMaxLifeTime)
 
-	if err := db.Use(otelgorm.NewPlugin()); err != nil {
-		panic(err)
-	}
+	//if err := db.Use(otelgorm.NewPlugin()); err != nil {
+	//	panic(err)
+	//}
 	return db
 }

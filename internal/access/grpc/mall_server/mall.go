@@ -2,7 +2,7 @@ package mall_server
 
 import (
 	"context"
-	"github.com/coderzhuang/core/provider/grpc_service"
+	"github.com/coderzhuang/core"
 	"github.com/jinzhu/copier"
 	"google.golang.org/grpc"
 	"log"
@@ -11,7 +11,7 @@ import (
 	"xframe/internal/service/goods/entity"
 )
 
-func RegisterServer(s *goods.Goods) grpc_service.Server {
+func RegisterServer(s *goods.Goods) core.RpcServer {
 	return func(e grpc.ServiceRegistrar) {
 		grpcMall.RegisterMallServer(e, &Mall{ServiceGoods: s})
 	}
