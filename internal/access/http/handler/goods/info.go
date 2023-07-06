@@ -1,6 +1,7 @@
 package goods
 
 import (
+	"github.com/coderzhuang/core"
 	"github.com/gin-gonic/gin"
 	"time"
 )
@@ -25,19 +26,19 @@ type InfoRes struct {
 func (h *HandlerGoods) Info(c *gin.Context) {
 	var req InfoReq
 	if err := c.ShouldBindQuery(&req); err != nil {
-		//common.ResponseErr(c, 100000, err.Error())
+		core.ResponseErr(c, 100000, err.Error())
 		return
 	}
 	_, err := h.ServiceGoods.Info(c.Request.Context(), req.Id)
 	if err != nil {
-		//common.ResponseErr(c, 100005, err.Error())
+		core.ResponseErr(c, 100005, err.Error())
 		return
 	}
 	//util.Get(c.Request.Context()) // 测试trace
 	//result := InfoRes{}
 	//if err := copier.Copy(&result, data); err != nil {
-	//	//common.ResponseErr(c, 100006, err.Error())
+	//	core.ResponseErr(c, 100006, err.Error())
 	//	return
 	//}
-	//common.ResponseSuc(c, result)
+	core.ResponseSuc(c, nil)
 }

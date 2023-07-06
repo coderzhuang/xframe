@@ -3,6 +3,7 @@ package internal
 import (
 	"github.com/coderzhuang/core"
 	"go.uber.org/dig"
+	"xframe/internal/access/cron"
 	"xframe/internal/access/grpc/mall_server"
 	handlerGoods "xframe/internal/access/http/handler/goods"
 	"xframe/internal/access/http/router"
@@ -14,6 +15,7 @@ func Init() {
 	core.RegistryService(
 		func(container *dig.Container) {
 			_ = container.Provide(router.InitRoute, dig.Group("middle"))
+			_ = container.Provide(cron.InitCron)
 
 			//  以下为业务-接入层
 			_ = container.Provide(mall_server.RegisterServer, dig.Group("grpc_server"))

@@ -1,10 +1,8 @@
 package router
 
 import (
-	"fmt"
 	"github.com/coderzhuang/core"
 	"github.com/gin-gonic/gin"
-	"xframe/config"
 	handlerGoods "xframe/internal/access/http/handler/goods"
 )
 
@@ -13,12 +11,13 @@ func InitRoute(
 ) core.Middle {
 	return func(e *gin.Engine) {
 		e.GET("/version", func(c *gin.Context) {
-			fmt.Println(config.Cfg.Text)
-			fmt.Println(config.Cfg.DB)
-			fmt.Println(config.Cfg.Redis)
-			c.JSON(200, map[string]string{
-				"BuildVersion": "1111",
-				"BuildAt":      config.Cfg.Text,
+			type Response struct {
+				BuildVersion string `json:"build_version"` //
+				BuildAt      string `json:"build_at"`      //
+			}
+			core.ResponseSuc(c, Response{
+				BuildVersion: "v1.0.0",
+				BuildAt:      "2023-01-01",
 			})
 		})
 		goodsGroup := e.Group("/goods")
