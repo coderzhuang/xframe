@@ -55,5 +55,5 @@ func New() *gorm.DB {
 	//if err := db.Use(otelgorm.NewPlugin()); err != nil {
 	//	panic(err)
 	//}
-	return nil
+	return db
 }

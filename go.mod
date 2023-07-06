@@ -3,6 +3,7 @@ module xframe
 go 1.16
 
 require (
+	git.juqitech.com/go/hms-components v0.5.8
 	github.com/coderzhuang/core v1.0.2
 	github.com/gin-gonic/gin v1.9.0
 	github.com/go-redis/redis/v8 v8.11.5
