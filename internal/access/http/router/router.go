@@ -3,6 +3,7 @@ package router
 import (
 	"github.com/coderzhuang/core"
 	"github.com/gin-gonic/gin"
+	"xframe/config"
 	"xframe/internal/access/http/handler"
 	handlerGoods "xframe/internal/access/http/handler/goods"
 )
@@ -20,13 +21,18 @@ func InitRoute(
 					BuildAt      string `json:"build_at"`      //
 				}
 				core.ResponseSuc(c, Response{
-					BuildVersion: "v1.0.0",
-					BuildAt:      "2023-01-01",
+					BuildVersion: config.BuildVersion,
+					BuildAt:      config.BuildAt,
 				})
 			})
 			base.POST("/register", HandlerUser.Register)     // 注册
 			base.POST("/login/password", HandlerUser.Login)  // 密码登录
 			base.GET("/get-captcha", HandlerUser.GetCaptcha) // 获取图形验证码
+		}
+
+		userGroup := e.Group("/user")
+		{
+			userGroup.GET("", HandlerUser.GetUser) // 获取用户信息
 		}
 
 		goodsGroup := e.Group("/goods")

@@ -22,3 +22,11 @@ func GetLog() *logrus.Logger {
 	myLog.SetLevel(logLevel)
 	return myLog
 }
+
+func Errorf(format string, args ...interface{}) {
+	GetLog().Errorf(format, args)
+}
+
+func Infof(format string, args ...interface{}) {
+	GetLog().Infof(format, args)
+}

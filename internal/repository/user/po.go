@@ -4,7 +4,7 @@ import "time"
 
 type User struct {
 	ID            int       `gorm:"primaryKey;column:id" json:"id"`                // 自增ID
-	UserID        string    `gorm:"column:user_id" json:"user_id"`                 // 用户ID
+	UserID        int64     `gorm:"column:user_id" json:"user_id"`                 // 用户ID
 	UserName      string    `gorm:"column:user_name" json:"user_name"`             // 用户真实姓名
 	NickName      string    `gorm:"column:nick_name" json:"nick_name"`             // 用户昵称
 	Sex           int       `gorm:"column:sex" json:"sex"`                         // 会员性别 0男 1女

@@ -2,6 +2,9 @@ package config
 
 import "time"
 
+var BuildVersion string
+var BuildAt string
+
 var Cfg = &Config{}
 
 type Config struct {

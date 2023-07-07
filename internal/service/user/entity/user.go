@@ -3,7 +3,7 @@ package entity
 import "time"
 
 type User struct {
-	UserID        string    `json:"user_id"`         // 用户ID
+	UserID        int64     `json:"user_id"`         // 用户ID
 	UserName      string    `json:"user_name"`       // 用户真实姓名
 	NickName      string    `json:"nick_name"`       // 用户昵称
 	Sex           int       `json:"sex"`             // 会员性别 0男 1女

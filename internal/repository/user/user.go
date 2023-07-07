@@ -12,6 +12,7 @@ type IUserRepository interface {
 	i() //接口中所有方法只能在本包中实现
 	Info(context.Context, int) (*entity.User, error)
 	GetUserByName(context.Context, string) (*entity.User, error)
+	GetUserById(context.Context, int64) (*entity.User, error)
 	CreateUSer(context.Context, *entity.User) error
 }
 
@@ -40,6 +41,24 @@ func (d *Repository) Info(ctx context.Context, id int) (res *entity.User, err er
 func (d *Repository) GetUserByName(ctx context.Context, username string) (res *entity.User, err error) {
 	userPo := User{}
 	err = d.Db.WithContext(ctx).Where("user_name=?", username).First(&userPo).Error
+	if err != nil && !errors.Is(err, gorm.ErrRecordNotFound) {
+		return
+	}
+	if errors.Is(err, gorm.ErrRecordNotFound) {
+		err = nil
+		return
+	}
+
+	res = &entity.User{}
+	if err = copier.Copy(res, &userPo); err != nil {
+		return
+	}
+	return
+}
+
+func (d *Repository) GetUserById(ctx context.Context, id int64) (res *entity.User, err error) {
+	userPo := User{}
+	err = d.Db.WithContext(ctx).Where("user_id=?", id).First(&userPo).Error
 	if err != nil && !errors.Is(err, gorm.ErrRecordNotFound) {
 		return
 	}
