@@ -4,6 +4,7 @@ import (
 	"github.com/coderzhuang/core"
 	"github.com/gin-gonic/gin"
 	"xframe/config"
+	"xframe/internal/access/http/dto"
 	"xframe/internal/access/http/handler"
 	handlerGoods "xframe/internal/access/http/handler/goods"
 )
@@ -16,11 +17,7 @@ func InitRoute(
 		base := e.Group("/")
 		{
 			base.GET("/version", func(c *gin.Context) {
-				type Response struct {
-					BuildVersion string `json:"build_version"` //
-					BuildAt      string `json:"build_at"`      //
-				}
-				core.ResponseSuc(c, Response{
+				core.ResponseSuc(c, dto.VersionResp{
 					BuildVersion: config.BuildVersion,
 					BuildAt:      config.BuildAt,
 				})
